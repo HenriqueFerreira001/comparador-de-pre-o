@@ -1,0 +1,107 @@
+:root{
+    --primary-coLor: #3498db;
+    --secondary-color:#2ecc71;
+    --background-color: #ecf0f1;
+    --text-color:#34495e;
+    --card-background:#ffffff;
+    --sandow-color: rgba(0,0,0,0.1);
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+}
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+h1{
+    text-align: center;
+    color: var(--primary-coLor);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+form{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+ form .product-input{
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid var(--primary-coLor);
+    outline: none;
+    border-radius: 25px;
+
+ }
+ form .product-input:focus{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+ }
+ form button{
+    padding: 12px 20px ;
+    background-color: var(--primary-coLor);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--background-color);
+    border-radius: 25px;
+    transition: 0.5s;
+ }
+ form button:hover{
+    background-color: #2980b9;
+ }
+.product-list{
+   display: grid;
+   gap: 25px;
+   grid-template-columns: repeat(auto-fill, minmax(250px ,1fr));
+   margin-bottom: 30px;
+    
+}
+
+.product-card{
+    background-color: var(--background-color);
+    border-radius: 10px;
+    box-shadow: var(--sandow-color);
+    text-align: center;
+}
+.product-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--sandow-color);
+}
+.product-card img{
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius:8px ;
+    margin-bottom: 18px;
+}
+.product-card h3{
+font-size: 1.3rem;
+margin-bottom: 20px;
+color: var(--primary-coLor);
+}
+.product-card .product-store{
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+.product-card .product-price{
+    color:var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+
+}
+
