@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>comparador de preço</title>
+</head>
+<body>
+    <main class="container" >
+        <h1> Dev compara preço</h1>
+        <form class="search-form">
+            <input placeholder="digite o nome do produto" class="product-input">
+            <button>buscar</button>
+        </form>
+        <div class="product-list"></div>
+        <canvas class="price-chart"></canvas>
+
+
+
+        
+    </main>
+</body>
+<script src="./scipts.js"></script>
+
+</html>
+
+:root{
+    --primary-coLor: #3498db;
+    --secondary-color:#2ecc71;
+    --background-color: #ecf0f1;
+    --text-color:#34495e;
+    --card-background:#ffffff;
+    --sandow-color: rgba(0,0,0,0.1);
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+}
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+h1{
+    text-align: center;
+    color: var(--primary-coLor);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+form{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+ form .product-input{
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid var(--primary-coLor);
+    outline: none;
+    border-radius: 25px;
+
+ }
+ form .product-input:focus{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+ }
+ form button{
+    padding: 12px 20px ;
+    background-color: var(--primary-coLor);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--background-color);
+    border-radius: 25px;
+    transition: 0.5s;
+ }
+ form button:hover{
+    background-color: #2980b9;
+ }
+.product-list{
+   display: grid;
+   gap: 25px;
+   grid-template-columns: repeat(auto-fill, minmax(250px ,1fr));
+   margin-bottom: 30px;
+    
+}
+
+.product-card{
+    background-color: var(--background-color);
+    border-radius: 10px;
+    box-shadow: var(--sandow-color);
+    text-align: center;
+}
+.product-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--sandow-color);
+}
+.product-card img{
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius:8px ;
+    margin-bottom: 18px;
+}
+.product-card h3{
+font-size: 1.3rem;
+margin-bottom: 20px;
+color: var(--primary-coLor);
+}
+.product-card .product-store{
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+.product-card .product-price{
+    color:var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+
+}
+
+
+const searchform = document.querySelector('.search-form')
+const productlist = document.querySelector('.product-list')
+const pricechart = document.querySelector ('.price-chart')
+
+let mychart
+searchform.addEventListener('submit', async function (event) {
+    event.preventDefault()
+    const inputvalue = event.target[0].value
+    const products = await data.json().result.slice(0, 10)
+    const data = await fetch (`https://api.mercadolibre.com/sites/MLB/search?q=${inputvalue}` ,)
+   
+    
+
+    displayItems(products)
+    pricechart(products)
+})
+
+function displayItems(products) {
+    productlist.innerHTML = products.map(produto => `
+    <div class="product-card">
+    <img src="${product.thumbnail.replace(/\w\.jpg/gi, 'w.jpg')}" alt="${product.title}">
+<h3>${product.title}</h3>
+<p class="product-price">${product.price.tolocalestring('pt-br', { style: "currency", currency: "BRL" })}</p>
+<p class="product-store"> loja: ${product.seller.nickname}</p>
+
+    </div>
+        
+       ` ) .join('')
+}
+function updatepricechart(products){
+
+}
+
